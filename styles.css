@@ -1,0 +1,146 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+a {
+	color: #333;
+	text-decoration: none;
+}
+
+body {
+	font-family: Arial, sans-serif;
+	padding: 0 20px;
+	padding-top: 100px;
+
+	max-width: 1240px;
+	margin: 0 auto;
+}
+
+h1,
+h2,
+h3 {
+	margin-bottom: 16px;
+}
+
+p {
+	line-height: 1.6;
+	margin-bottom: 16px;
+}
+
+ul {
+	li {
+		list-style: none;
+	}
+}
+
+nav {
+	position: fixed;
+	top: 0;
+	left: 50%;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 16px 20px;
+
+	transform: translateX(-50%);
+
+	max-width: 1240px;
+
+	ul {
+		display: flex;
+		gap: 8px;
+
+		li {
+			a {
+				display: block;
+				padding: 8px 16px;
+				border-radius: 8px;
+				transition: background-color 0.3s;
+
+				&:hover {
+					color: #fff;
+					background-color: #333;
+				}
+			}
+			&.active {
+				a {
+					color: #fff;
+					background-color: #333;
+				}
+			}
+		}
+	}
+}
+
+main {
+	img {
+		width: 100%;
+		height: auto;
+		border-radius: 16px;
+		margin-bottom: 16px;
+	}
+}
+
+.articles {
+	display: grid;
+	gap: 20px;
+	grid-template-columns: repeat(3, minmax(300px, 1fr));
+
+	article {
+		padding: 16px;
+		border: 1px solid #ddd;
+		border-radius: 16px;
+		img {
+			width: 100%;
+			height: auto;
+			border-radius: 16px;
+			margin-bottom: 16px;
+		}
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	/* PAGE TRANSITIONS */
+	@view-transition {
+		navigation: auto;
+	}
+
+	/* ::view-transition-group(root) { */
+	::view-transition-group(page-content) {
+		animation-duration: 0.5s;
+		animation-timing-function: ease;
+	}
+
+	/* ::view-transition-old(root) { */
+	::view-transition-old(page-content) {
+		animation-name: slide-out;
+	}
+
+	/* ::view-transition-new(root) { */
+	::view-transition-new(page-content) {
+		animation-name: slide-in;
+	}
+
+	main {
+		view-transition-name: page-content;
+	}
+
+	.card img,
+	.hero-image {
+		view-transition-name: article-image;
+	}
+
+	@keyframes slide-out {
+		to {
+			translate: -100vw;
+		}
+	}
+	@keyframes slide-in {
+		from {
+			translate: 100vw;
+		}
+	}
+}
